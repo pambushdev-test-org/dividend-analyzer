@@ -41,7 +41,7 @@ setup(
     install_requires=get_requirements(),
     entry_points={
         'console_scripts': [
-            f'dividend-analyzer = {src_dir}.__main__:main'
+            f'dividend-analyzer = {src_dir}.main:main'
         ]
     }
 )

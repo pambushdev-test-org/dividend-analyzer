@@ -7,10 +7,10 @@ import os
 import logging
 import traceback
 from decouple import config
-import dividend_analysis
+from . import analysis
 
 DATA_DIR = 'data'
-logging.basicConfig(filename='logs.txt', encoding='utf-8', 
+logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
 					level=logging.DEBUG)
 
@@ -30,7 +30,7 @@ class DividendData():
 			self.scrape_dividend_data(source=source)			
 			self.gen_report()
 			# Go process all the data received
-			d = dividend_analysis.DataAnalysis()
+			d = analysis.DataAnalysis()
 			d.process_data()
 		except Exception as err:
 			print(f'Could not get ticker data from {source}.', flush=True)

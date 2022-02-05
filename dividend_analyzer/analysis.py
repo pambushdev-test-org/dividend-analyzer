@@ -6,10 +6,10 @@ import traceback
 from os import listdir
 from os.path import isfile, join
 from decouple import config
-import dividend_alerts
+from . import alerts
 
 DATA_DIR = 'data'
-logging.basicConfig(filename='logs.txt', encoding='utf-8', 
+logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
 					level=logging.DEBUG)
 
@@ -86,4 +86,4 @@ class DataAnalysis:
 	# Send email alerts if there are changes to any of the dividend data
 	def gen_alerts(self):
 		print('Sending email report of changes...', flush=True)
-		dividend_alerts.send_email_report(self.report_data)
+		alerts.send_email_report(self.report_data)

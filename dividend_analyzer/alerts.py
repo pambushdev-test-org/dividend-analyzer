@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from decouple import config
 
-logging.basicConfig(filename='logs.txt', encoding='utf-8', 
+logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
 					level=logging.DEBUG)
 

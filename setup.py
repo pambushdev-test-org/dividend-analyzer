@@ -17,7 +17,7 @@ def get_email_dependencies():
 
 setup(
     name='dividend-analyzer',
-    version='0.0.1',
+    version='0.0.11',
     description='App for fetching and analyzing dividend data for a list of stock tickers.',
     long_description=readme,
     author='Paris Ambush',
@@ -25,5 +25,6 @@ setup(
     url='https://github.com/pambushdev-test-org/dividend-analyzer',
     license=license,
     data_files=[('email', get_email_dependencies())],
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests', 'docs')),
+    install_requires=['pandas', 'yfinance', 'decouple']
 )

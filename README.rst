@@ -17,10 +17,8 @@ Some of these services don't have complete data on tickers (eg. AlphaVantage doe
 
 Usage
 ------------------
-1. In the app root folder, make a file called **.env**
-2. The .env file contains environment variable for the app. See the Environment Variables section below on how to setup.
-3. python setup.py
-4. python build/lib/dividend-analyzer/main.py
+1. In the app root folder, make a file called **.env**. The .env file contains environment variable for the app. See the Environment Variables section below on how to setup.
+2. python dividend-analyzer/dividend-analyzer.py
 
 App store data for each ticker in **.csv** files in the **data** folder for each ticker. The data in these files are analyzed for changes in both dividend rate and yield. If there are changes, a report will be generated an then emailed to the configured recipient under RECEIVER in the **.env** file. The report will show the deltas of the dividend rate and yields of the tickers that changed based on the reference data received.
 

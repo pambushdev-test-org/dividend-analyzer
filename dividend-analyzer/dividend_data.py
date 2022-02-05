@@ -9,13 +9,10 @@ import traceback
 from decouple import config
 import dividend_analysis
 
-DATA_DIR = config('DATA_DIR')
-logging.basicConfig(filename='logs.txt', 
-					encoding='utf-8', 
-					format='%(asctime)s %(message)s', 
-					datefmt='%Y/%m/%d/ %I:%M:%S %p', 
-					level=logging.DEBUG
-)
+DATA_DIR = 'data'
+logging.basicConfig(filename='logs.txt', encoding='utf-8', 
+					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
+					level=logging.DEBUG)
 
 class DividendData():
 	

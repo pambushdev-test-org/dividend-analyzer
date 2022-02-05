@@ -13,18 +13,18 @@ logging.basicConfig(filename='logs.txt', encoding='utf-8',
 					level=logging.DEBUG)
 
 def send_email_report(data):
-	EMAIL_DIR = config('EMAIL_DIR')
+	EMAIL_DIR = 'email'
 	email_txt = open(os.path.join(EMAIL_DIR, 'email_txt.txt')).read()
 	email_html = open(os.path.join(EMAIL_DIR, 'email_html.html')).read()
 
 	# Place data as an html table inside the html of email_html. Replacing via placeholder {data}.
 	email_html = email_html.replace(r'{data}', data.to_html())
 
-	port = config('PORT')
-	password = config('PASS')
-	sender = config('SENDER')
-	receiver = config('RECEIVER')
-	subject = 'Dividend Report'
+	port 		= 465
+	password 	= config('PASS')
+	sender 		= config('SENDER')
+	receiver 	= config('RECEIVER')
+	subject 	= 'Dividend Report'
 
 	# Create a secure SSL context
 	context = ssl.create_default_context()

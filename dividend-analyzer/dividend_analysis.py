@@ -8,7 +8,7 @@ from os.path import isfile, join
 from decouple import config
 import dividend_alerts
 
-DATA_DIR = config('DATA_DIR')
+DATA_DIR = 'data'
 logging.basicConfig(filename='logs.txt', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
 					level=logging.DEBUG)

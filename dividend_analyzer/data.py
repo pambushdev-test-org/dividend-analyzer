@@ -4,6 +4,7 @@ import time
 import requests
 import pandas as pd
 import os
+import sys
 import logging
 import traceback
 from decouple import config
@@ -75,8 +76,8 @@ class DividendData():
 				except Exception as err:
 					print('Could not get ticker data from AlphaVantage. List of tickers may not have been provided.', flush=True)
 					traceback.print_exc()
-			case _:
-				print('No API data source specified.', flush=True)
+			case _:				
+				sys.exit('No API data source specified or unsupported source given.')
 
 	# Scrape the downloaded ticker data for dividend info. Store results in a table.
 	def scrape_dividend_data(self, source):

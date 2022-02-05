@@ -1,9 +1,9 @@
 import pandas as pd
 import smtplib
 import ssl
-import os
 import logging
 import traceback
+from os.path import join
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from decouple import config
@@ -14,8 +14,8 @@ logging.basicConfig(filename='logs.txt', encoding='utf-8',
 
 def send_email_report(data):
 	EMAIL_DIR = 'email'
-	email_txt = open(os.path.join(EMAIL_DIR, 'email_txt.txt')).read()
-	email_html = open(os.path.join(EMAIL_DIR, 'email_html.html')).read()
+	email_txt = open(join(EMAIL_DIR, 'email_txt.txt')).read()
+	email_html = open(join(EMAIL_DIR, 'email_html.html')).read()
 
 	# Place data as an html table inside the html of email_html. Replacing via placeholder {data}.
 	email_html = email_html.replace(r'{data}', data.to_html())

@@ -7,15 +7,14 @@ import os
 import sys
 import logging
 import traceback
-from conf import config
-import analysis
+from .conf import config
+from . import analysis
 
-CONFIG_DIR = 'conf'
-configs = config.get_configs(CONFIG_DIR)
+configs = config.get_configs()
 DATA_DIR = configs['DATA']['DATA_DIR']
-logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
+'''logging.basicConfig(filename='./logs/logs.txt', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
-					level=logging.DEBUG)
+					level=logging.DEBUG)'''
 
 class DividendData():
 	

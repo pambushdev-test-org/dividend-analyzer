@@ -6,15 +6,15 @@ import traceback
 from os.path import join
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from conf import config
+from .conf import config
 
-logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
+'''logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
-					level=logging.DEBUG)
+					level=logging.DEBUG)'''
 
 def send_email_report(data):
-	CONFIG_DIR = 'conf'
-	configs = config.get_configs(CONFIG_DIR)
+	#CONFIG_DIR = 'conf'
+	configs = config.get_configs()
 	EMAIL_DIR = 'email' # email templates
 	email_txt = open(join(EMAIL_DIR, 'email_txt.txt')).read()
 	email_html = open(join(EMAIL_DIR, 'email_html.html')).read()

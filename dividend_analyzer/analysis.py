@@ -5,15 +5,14 @@ import logging
 import traceback
 from os import listdir
 from os.path import isfile, join
-from conf import config
-import alerts
+from .conf import config
+from . import alerts
 
-CONFIG_DIR = 'conf'
-configs = config.get_configs(CONFIG_DIR)
+configs = config.get_configs()
 DATA_DIR = configs['DATA']['DATA_DIR']
-logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
+'''logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
-					level=logging.DEBUG)
+					level=logging.DEBUG)'''
 
 class DataAnalysis:
 	def __init__(self):

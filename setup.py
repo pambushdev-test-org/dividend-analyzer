@@ -32,12 +32,12 @@ setup(
     author='Paris Ambush',
     author_email='paris.ambush@gmail.com',
     url='https://github.com/pambushdev-test-org/dividend-analyzer',
-    license=license,
-    data_files=[
-        (f'{src_dir}/email', get_email_dependencies()),
-        ('', ['.env'])
-    ],
+    license=license,    
     packages=find_packages(exclude=('tests', 'docs')),
+    data_files=[
+        (f'Lib/site-packages/{src_dir}/conf', ['confg/config.ini']),
+        (f'Lib/site-packages/{src_dir}/email', get_email_dependencies())
+    ],
     install_requires=get_requirements(),
     entry_points={
         'console_scripts': [

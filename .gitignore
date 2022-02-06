@@ -94,3 +94,4 @@ ENV/
 dividend_analyzer/data
 dividend_analyzer/test-data
 dividend_analyzer/logs
+dividend_analyzer/config.ini

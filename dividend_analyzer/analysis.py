@@ -5,10 +5,12 @@ import logging
 import traceback
 from os import listdir
 from os.path import isfile, join
-from decouple import config
-from . import alerts
+from conf import config
+import alerts
 
-DATA_DIR = 'data'
+CONFIG_DIR = 'conf'
+configs = config.get_configs(CONFIG_DIR)
+DATA_DIR = configs['DATA']['DATA_DIR']
 logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
 					level=logging.DEBUG)

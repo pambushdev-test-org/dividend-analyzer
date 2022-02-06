@@ -7,10 +7,12 @@ import os
 import sys
 import logging
 import traceback
-from decouple import config
-from . import analysis
+from conf import config
+import analysis
 
-DATA_DIR = 'data'
+CONFIG_DIR = 'conf'
+configs = config.get_configs(CONFIG_DIR)
+DATA_DIR = configs['DATA']['DATA_DIR']
 logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
 					level=logging.DEBUG)
@@ -56,7 +58,7 @@ class DividendData():
 				except:
 					print("Could not get ticker data from Yahoo Finance. List of tickers may not have been provided.", flush=True)
 			case 'alphavantage':
-				API_KEY = config('ALPHAVANTAGE_API_KEY')
+				API_KEY = configs['API_KEYS']['ALPHAVANTAGE_API_KEY']
 				try:
 					# Input is a string of space separated tickers. Convert to a list here for iteration later.
 					tickers_list = list(self.tickers.split(' '))
@@ -132,7 +134,7 @@ class DividendData():
 					return {'data_missing': ''}
 			case 'polygon':
 				# Process polygon.io dividend payment data
-				API_KEY = config('POLYGON_API_KEY')
+				API_KEY = API_KEY = configs['API_KEYS']['POLYGON_API_KEY']
 				limit = 12
 				try:
 					# Get last 12 dividend payments for ticker

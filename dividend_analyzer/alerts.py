@@ -6,14 +6,16 @@ import traceback
 from os.path import join
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from decouple import config
+from conf import config
 
 logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
 					level=logging.DEBUG)
 
 def send_email_report(data):
-	EMAIL_DIR = 'email'
+	CONFIG_DIR = 'conf'
+	configs = config.get_configs(CONFIG_DIR)
+	EMAIL_DIR = 'email' # email templates
 	email_txt = open(join(EMAIL_DIR, 'email_txt.txt')).read()
 	email_html = open(join(EMAIL_DIR, 'email_html.html')).read()
 
@@ -21,9 +23,9 @@ def send_email_report(data):
 	email_html = email_html.replace(r'{data}', data.to_html())
 
 	port 		= 465
-	password 	= config('PASS')
-	sender 		= config('SENDER')
-	receiver 	= config('RECEIVER')
+	password 	= configs['EMAIL_VARS']['PASS']
+	sender 		= configs['EMAIL_VARS']['SENDER']
+	receiver 	= configs['EMAIL_VARS']['RECEIVER']
 	subject 	= 'Dividend Report'
 
 	# Create a secure SSL context

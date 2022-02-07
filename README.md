@@ -11,13 +11,13 @@ Data for tickers are pulled from API market data services. The following service
 - Polygon\.io
 - Yahoo Finance
 
-Some of these services don't have complete data on tickers (eg. AlphaVantage doesn't have dividend payment history) or may be missing data for a ticker entirely. Polygon.io is currently being used to fetch dividend payment history as it appears to be the most complete and accurate. Other service options may be added in the future, but for now, this app focuses on more free tiered services.
+Some of these services don't have complete data on tickers (eg. AlphaVantage doesn't have dividend payment history) or may be missing data for a ticker entirely. Polygon\.io is currently being used to fetch dividend payment history as it appears to be the most complete and accurate. Other service options may be added in the future, but for now, this app focuses on more free tiered services.
 
 ## Usage
 
 1. Setup a **config.ini** file (see config section below). Place it in the folder **dividend_analyzer/config**. This file contains configuration variables for the app including API keys and stock ticker list.
 2. From app root directory: python setup.py install
-3. Verify install: dividend-analyzer -v
+3. Verify install: `dividend-analyzer -v`
 
 ```
 >>> dividend-analyzer
@@ -35,23 +35,36 @@ When run, the app stores data for each ticker in **.csv** files in the **DATA_DI
 ## Config
 Structure your **config.ini** file like below.
 
-### API Keys:
+\# API Keys
+
 [API_KEYS]
+
 ALPHAVANTAGE_API_KEY=your_api_key
+
 POLYGON_API_KEY=your_api_key
 
-### Data Source and Directory:
+\# Data Source and Directory:
+
 \# Current options are yahoo or alphavantage, but alphavantange works best here so far
+
 [DATA]
+
 DATA_SOURCE=alphavantage
+
 DATA_DIR=data
 
-### Email:
+\# Email Variables:
+
 [EMAIL_VARS]
+
 SENDER=sender.address\@email.com
+
 RECEIVER=receiver.address\@email.com
+
 PASS=email_password
 
-### List of Stock Tickers (string of space-separated tickers):
+\# List of Stock Tickers (string of space-separated tickers):
+
 [TICKERS]
+
 TICKER_LIST=AAPL MSFT GOOGL

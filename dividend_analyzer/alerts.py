@@ -6,16 +6,11 @@ import traceback
 import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from . import config
-
-PARENT_DIR = os.path.abspath(os.path.dirname(__file__))
-logging.basicConfig(filename=f'{os.path.join(PARENT_DIR, "logs/logs.txt")}', encoding='utf-8', 
-					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
-					level=logging.DEBUG)
+from . import PARENT_DIR, EMAIL_VARS
 
 def send_email_report(data):
 	configs = config.get_configs()
-	EMAIL_DIR = 'email' # email templates
+	EMAIL_DIR = os.path.join(PARENT_DIR, 'email') # email templates
 	email_txt = open(os.path.join(EMAIL_DIR, 'email_txt.txt')).read()
 	email_html = open(os.path.join(EMAIL_DIR, 'email_html.html')).read()
 
@@ -23,9 +18,9 @@ def send_email_report(data):
 	email_html = email_html.replace(r'{data}', data.to_html())
 
 	port 		= 465
-	password 	= configs['EMAIL_VARS']['PASS']
-	sender 		= configs['EMAIL_VARS']['SENDER']
-	receiver 	= configs['EMAIL_VARS']['RECEIVER']
+	password 	= EMAIL_VARS['PASS']
+	sender 		= EMAIL_VARS['SENDER']
+	receiver 	= EMAIL_VARS['RECEIVER']
 	subject 	= 'Dividend Report'
 
 	# Create a secure SSL context

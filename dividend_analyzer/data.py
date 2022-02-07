@@ -7,15 +7,8 @@ import os
 import sys
 import logging
 import traceback
-from . import config
 from . import analysis
-
-configs = config.get_configs()
-DATA_DIR = configs['DATA']['DATA_DIR']
-PARENT_DIR = os.path.abspath(os.path.dirname(__file__))
-logging.basicConfig(filename=f'{os.path.join(PARENT_DIR, "logs/logs.txt")}', encoding='utf-8', 
-					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
-					level=logging.DEBUG)
+from . import API_KEYS, PARENT_DIR, DATA_DIR
 
 class DividendData():
 	
@@ -57,8 +50,8 @@ class DividendData():
 						print(f'Data for ticker {i} received in {t}s. Progress: [{count}/{len(self.ticker_objs)}]')
 				except:
 					print("Could not get ticker data from Yahoo Finance. List of tickers may not have been provided.", flush=True)
-			case 'alphavantage':
-				API_KEY = configs['API_KEYS']['ALPHAVANTAGE_API_KEY']
+			case 'alphavantage':				
+				API_KEY = API_KEYS['ALPHAVANTAGE_API_KEY']
 				try:
 					# Input is a string of space separated tickers. Convert to a list here for iteration later.
 					tickers_list = list(self.tickers.split(' '))
@@ -134,7 +127,7 @@ class DividendData():
 					return {'data_missing': ''}
 			case 'polygon':
 				# Process polygon.io dividend payment data
-				API_KEY = API_KEY = configs['API_KEYS']['POLYGON_API_KEY']
+				API_KEY = API_KEYS['POLYGON_API_KEY']
 				limit = 12
 				try:
 					# Get last 12 dividend payments for ticker

@@ -2,6 +2,7 @@ import sys
 import argparse
 from . import config
 from . import data
+from . import TICKER_LIST, DATA_SOURCE
 from .version import version
 
 description = 'Runs the app and gathers dividend data. Generates a report if changes are found.'
@@ -49,10 +50,7 @@ def main(args=None):
 		else:
 			config_func()
 
-	# Get configs and run the dividend checker	
-	configs = config.get_configs()
-	TICKER_LIST = configs['TICKERS']['TICKER_LIST']
-	DATA_SOURCE = configs['DATA']['DATA_SOURCE']	
+	# Run the dividend checker
 	d = data.DividendData(TICKER_LIST)
 	d.check_dividends(DATA_SOURCE)
 

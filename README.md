@@ -43,15 +43,17 @@ ALPHAVANTAGE_API_KEY=your_api_key
 
 POLYGON_API_KEY=your_api_key
 
-\# Data Source and Directory:
+<br />
 
-\# Current options are yahoo or alphavantage, but alphavantange works best here so far
+\# Data Source and Directory. Current options are yahoo or alphavantage, but alphavantange works best here so far
 
 [DATA]
 
 DATA_SOURCE=alphavantage
 
 DATA_DIR=data
+
+<br />
 
 \# Email Variables:
 
@@ -62,6 +64,8 @@ SENDER=sender.address\@email.com
 RECEIVER=receiver.address\@email.com
 
 PASS=email_password
+
+<br />
 
 \# List of Stock Tickers (string of space-separated tickers):
 

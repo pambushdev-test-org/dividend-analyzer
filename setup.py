@@ -12,11 +12,6 @@ with open('README.rst') as f:
 with open('LICENSE') as f:
     license = f.read()
 
-def get_email_dependencies():    
-    path = join(src_dir, 'email')
-    file_list = [join(path, f) for f in listdir(path) if isfile(join(path, f))]
-    return file_list
-
 def get_requirements():
     reqs = []
     with open('requirements.txt') as f:

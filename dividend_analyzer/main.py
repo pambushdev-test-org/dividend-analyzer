@@ -1,6 +1,6 @@
 import sys
 import argparse
-from .conf import config
+from . import config
 from . import data
 from .version import version
 

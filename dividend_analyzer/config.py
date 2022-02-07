@@ -2,7 +2,7 @@ from configparser import ConfigParser
 from os import path
 
 curr_dir = path.abspath(path.dirname(__file__))
-CONFIG_DIR = path.join(curr_dir, '.')
+CONFIG_DIR = path.join(curr_dir, 'config')
 
 # Get configs from config.ini file
 def get_configs():	

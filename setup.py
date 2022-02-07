@@ -34,10 +34,7 @@ setup(
     url='https://github.com/pambushdev-test-org/dividend-analyzer',
     license=license,    
     packages=find_packages(exclude=('tests', 'docs')),
-    data_files=[
-        (f'Lib/site-packages/{src_dir}/conf', ['confg/config.ini']),
-        (f'Lib/site-packages/{src_dir}/email', get_email_dependencies())
-    ],
+    include_package_data=True,
     install_requires=get_requirements(),
     entry_points={
         'console_scripts': [

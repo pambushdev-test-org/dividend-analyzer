@@ -3,21 +3,21 @@ import smtplib
 import ssl
 import logging
 import traceback
-from os.path import join
+import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from .conf import config
+from . import config
 
-'''logging.basicConfig(filename='logs/logs.txt', encoding='utf-8', 
+curr_dir = os.path.abspath(os.path.dirname(__file__))
+logging.basicConfig(filename=f'{os.path.join(curr_dir, "logs/logs.txt")}', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
-					level=logging.DEBUG)'''
+					level=logging.DEBUG)
 
 def send_email_report(data):
-	#CONFIG_DIR = 'conf'
 	configs = config.get_configs()
 	EMAIL_DIR = 'email' # email templates
-	email_txt = open(join(EMAIL_DIR, 'email_txt.txt')).read()
-	email_html = open(join(EMAIL_DIR, 'email_html.html')).read()
+	email_txt = open(os.path.join(EMAIL_DIR, 'email_txt.txt')).read()
+	email_html = open(os.path.join(EMAIL_DIR, 'email_html.html')).read()
 
 	# Place data as an html table inside the html of email_html. Replacing via placeholder {data}.
 	email_html = email_html.replace(r'{data}', data.to_html())

@@ -1,0 +1,3 @@
+recursive-include dividend_analyzer/config *
+recursive-include dividend_analyzer/logs *
+recursive-include dividend_analyzer/email *

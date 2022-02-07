@@ -93,5 +93,4 @@ ENV/
 # Dividend analyzer package data files and directories
 dividend_analyzer/data
 dividend_analyzer/test-data
-dividend_analyzer/conf/config.ini
-conf/config.ini
+dividend_analyzer/config/config.ini

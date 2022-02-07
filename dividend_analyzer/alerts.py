@@ -8,8 +8,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from . import config
 
-curr_dir = os.path.abspath(os.path.dirname(__file__))
-logging.basicConfig(filename=f'{os.path.join(curr_dir, "logs/logs.txt")}', encoding='utf-8', 
+PARENT_DIR = os.path.abspath(os.path.dirname(__file__))
+logging.basicConfig(filename=f'{os.path.join(PARENT_DIR, "logs/logs.txt")}', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
 					level=logging.DEBUG)
 

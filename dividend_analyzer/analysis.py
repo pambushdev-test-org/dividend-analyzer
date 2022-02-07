@@ -10,8 +10,8 @@ from . import alerts
 
 configs = config.get_configs()
 DATA_DIR = configs['DATA']['DATA_DIR']
-curr_dir = os.path.abspath(os.path.dirname(__file__))
-logging.basicConfig(filename=f'{os.path.join(curr_dir, "logs/logs.txt")}', encoding='utf-8', 
+PARENT_DIR = os.path.abspath(os.path.dirname(__file__))
+logging.basicConfig(filename=f'{os.path.join(PARENT_DIR, "logs/logs.txt")}', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
 					level=logging.DEBUG)
 
@@ -22,11 +22,10 @@ class DataAnalysis:
 
 	def process_data(self):
 		try:
-			if not os.path.exists(DATA_DIR):
+			if not os.path.exists(os.path.join(PARENT_DIR, DATA_DIR)):
 				print('No dividend data found to analyze in the data folder.', flush=True)
 			else:
-				parent_dir = os.getcwd()
-				path = os.path.join(parent_dir, DATA_DIR)
+				path = os.path.join(PARENT_DIR, DATA_DIR)
 				file_list = [os.path.join(path, f) for f in listdir(path) if isfile(join(path, f))]
 				for f in file_list:
 					self.analyze_data(file=f)

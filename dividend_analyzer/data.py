@@ -12,8 +12,8 @@ from . import analysis
 
 configs = config.get_configs()
 DATA_DIR = configs['DATA']['DATA_DIR']
-curr_dir = os.path.abspath(os.path.dirname(__file__))
-logging.basicConfig(filename=f'{os.path.join(curr_dir, "logs/logs.txt")}', encoding='utf-8', 
+PARENT_DIR = os.path.abspath(os.path.dirname(__file__))
+logging.basicConfig(filename=f'{os.path.join(PARENT_DIR, "logs/logs.txt")}', encoding='utf-8', 
 					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
 					level=logging.DEBUG)
 
@@ -182,11 +182,10 @@ class DividendData():
 
 	# Generate printed report of dividend status and data. Store in the data folder.
 	def gen_report(self):
-		if not os.path.exists(DATA_DIR):
-			os.mkdir(DATA_DIR)
-		data_dir = DATA_DIR
-		parent_dir = os.getcwd()
-		path = os.path.join(parent_dir, DATA_DIR)
+		if not os.path.exists(os.path.join(PARENT_DIR, DATA_DIR)):
+			os.mkdir(os.path.join(PARENT_DIR, DATA_DIR))
+		
+		path = os.path.join(PARENT_DIR, DATA_DIR)
 		print('Generating reports...', flush=True)
 		for s in self.scraped_data:
 			target = os.path.join(path, s)

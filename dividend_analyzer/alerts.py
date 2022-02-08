@@ -9,7 +9,6 @@ from email.mime.multipart import MIMEMultipart
 from . import PARENT_DIR, EMAIL_VARS
 
 def send_email_report(data):
-	configs = config.get_configs()
 	EMAIL_DIR = os.path.join(PARENT_DIR, 'email') # email templates
 	email_txt = open(os.path.join(EMAIL_DIR, 'email_txt.txt')).read()
 	email_html = open(os.path.join(EMAIL_DIR, 'email_html.html')).read()

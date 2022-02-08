@@ -33,42 +33,29 @@ Updates the config.ini
 When run, the app stores data for each ticker in **.csv** files in the **DATA_DIR** folder for each ticker. The data in these files are analyzed for changes in both dividend rate and yield. If there are changes, a report will be generated an then emailed to the recipient configured under **RECEIVER** in the **config.ini** file. The report will show the deltas of the dividend rate and yields of the tickers that changed based on the reference data received.
 
 ## Config
-Structure your **config.ini** file like below.
-
-\# API Keys. Only AplhaVantage and Polygon\.io need API keys. You can get free keys from them: www.alphavantage.co, www.polygon.io. BOTH keys are need if choosing AlphaVantage as the data source.
-
+Structure your **config.ini** file like below and store in the **config** folder.
+```
+# API Keys. Only AplhaVantage and Polygon.io need API keys. 
+# You can get free keys from them: www.alphavantage.co, www.polygon.io. 
+# BOTH keys are need if choosing AlphaVantage as the data source.
 [API_KEYS]
-
 ALPHAVANTAGE_API_KEY=your_alphavantage_api_key
+POLYGON_API_KEY=your_polygon.io_api_key
 
-POLYGON_API_KEY=your_polygon\.io_api_key
-
-<br />
-
-\# Data Source and Directory. Current options are **yahoo** or **alphavantage**, but alphavantange works best so far.
-
+# Data Source and Directory. 
+# Current options for source are **yahoo** or **alphavantage**, but alphavantange works best so far.
 [DATA]
-
 DATA_SOURCE=alphavantage
-
 DATA_DIR=data
 
-<br />
-
-\# Email Variables. Specify sender and receiver email address along with the email client password. Best to use a separate email account just for this purpose.
-
+# Email Variables. Specify sender and receiver email address along with the email client password. 
+# Best to use a separate email account just for this purpose.
 [EMAIL_VARS]
-
-SENDER=sender.address\@email.com
-
-RECEIVER=receiver.address\@email.com
-
+SENDER=sender.address@email.com
+RECEIVER=receiver.address@email.com
 PASS=email_password
 
-<br />
-
-\# List of Stock Tickers (string of space-separated tickers):
-
+# List of Stock Tickers (string of space-separated tickers):
 [TICKERS]
-
 TICKER_LIST=AAPL MSFT GOOGL
+```

@@ -34,8 +34,9 @@ When run, the app stores data for each ticker in **.csv** files in the **DATA_DI
 
 ## Config
 Structure your **config.ini** file like below.
-
-\# API Keys. Only AplhaVantage and Polygon\.io need API keys. You can get free keys from them: www.alphavantage.co, www.polygon.io. BOTH keys are need if choosing AlphaVantage as the data source.
+```
+# API Keys. Only AplhaVantage and Polygon\.io need API keys. 
+# You can get free keys from them: www.alphavantage.co, www.polygon.io. BOTH keys are need if choosing AlphaVantage as the data source.
 
 [API_KEYS]
 
@@ -43,9 +44,9 @@ ALPHAVANTAGE_API_KEY=your_alphavantage_api_key
 
 POLYGON_API_KEY=your_polygon\.io_api_key
 
-<br />
 
-\# Data Source and Directory. Current options are **yahoo** or **alphavantage**, but alphavantange works best so far.
+
+# Data Source and Directory. Current options are **yahoo** or **alphavantage**, but alphavantange works best so far.
 
 [DATA]
 
@@ -53,9 +54,9 @@ DATA_SOURCE=alphavantage
 
 DATA_DIR=data
 
-<br />
 
-\# Email Variables. Specify sender and receiver email address along with the email client password. Best to use a separate email account just for this purpose.
+
+# Email Variables. Specify sender and receiver email address along with the email client password. Best to use a separate email account just for this purpose.
 
 [EMAIL_VARS]
 
@@ -65,10 +66,11 @@ RECEIVER=receiver.address\@email.com
 
 PASS=email_password
 
-<br />
 
-\# List of Stock Tickers (string of space-separated tickers):
+
+# List of Stock Tickers (string of space-separated tickers):
 
 [TICKERS]
 
 TICKER_LIST=AAPL MSFT GOOGL
+```

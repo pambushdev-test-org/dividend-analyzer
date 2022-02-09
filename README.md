@@ -14,7 +14,7 @@ Data for tickers are pulled from API market data services. The following service
 Some of these services don't have complete data on tickers (eg. AlphaVantage doesn't have dividend payment history) or may be missing data for a ticker entirely. Polygon\.io is currently being used to fetch dividend payment history as it appears to be the most complete and accurate. Other service options may be added in the future, but for now, this app focuses on more free tiered services.
 
 ## Usage
-
+**NOTE: This app requires python v3.10 or later**
 1. Setup a **config.ini** file (see config section below). Place it in the folder **dividend_analyzer/config**. This file contains configuration variables for the app including API keys and stock ticker list.
 2. From app root directory: python setup.py install
 3. Verify install: `dividend-analyzer -v`

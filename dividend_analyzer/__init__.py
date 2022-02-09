@@ -1,5 +1,6 @@
 import os
 import logging
+from logging.handlers import RotatingFileHandler
 from . import config
 
 # Setup project variables
@@ -11,6 +12,11 @@ API_KEYS 	= configs['API_KEYS']
 TICKER_LIST = configs['TICKERS']['TICKER_LIST']
 EMAIL_VARS 	= configs['EMAIL_VARS']
 
-logging.basicConfig(filename=f'{os.path.join(PARENT_DIR, "logs/logs.txt")}', encoding='utf-8', 
-					format='%(asctime)s %(message)s', datefmt='%Y/%m/%d/ %I:%M:%S %p', 
-					level=logging.DEBUG)
+# Setup logging config with rotating file handler
+log_file = os.path.join(PARENT_DIR, 'logs/logs.txt')
+handler = RotatingFileHandler(log_file, maxBytes=10*1024*1024, backupCount=2)
+logging.basicConfig(encoding='utf-8',
+					format='%(asctime)s %(message)s',
+					datefmt='%Y/%m/%d/ %I:%M:%S %p', 
+					level=logging.DEBUG,
+					handlers=[handler])

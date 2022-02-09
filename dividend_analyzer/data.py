@@ -180,22 +180,25 @@ class DividendData():
 		
 		path = os.path.join(PARENT_DIR, DATA_DIR)
 		print('Generating reports...', flush=True)
-		for s in self.scraped_data:
-			target = os.path.join(path, s)
-			report_time = time.strftime("%Y-%m-%d %H:%M:%S %p", time.localtime())
-			new_data = pd.DataFrame(self.scraped_data[s], index=[report_time])
+		try:
+			for s in self.scraped_data:
+				target = os.path.join(path, s)
+				report_time = time.strftime("%Y-%m-%d %H:%M:%S %p", time.localtime())
+				new_data = pd.DataFrame(self.scraped_data[s], index=[report_time])
 
-			if not os.path.exists(f'{target}.csv'):				
-				new_data.to_csv(f'{target}.csv')
-			# Read data from existing csv file for ticker, append new data, then write back to file. Store data in reverse chrono order.
-			else:
-				data = pd.read_csv(f'{target}.csv', index_col=0)
-				data = pd.concat([new_data, data])
-				data = data.drop_duplicates()
+				if not os.path.exists(f'{target}.csv'):				
+					new_data.to_csv(f'{target}.csv')
+				# Read data from existing csv file for ticker, append new data, then write back to file. Store data in reverse chrono order.
+				else:
+					data = pd.read_csv(f'{target}.csv', index_col=0)
+					data = pd.concat([new_data, data])
+					data = data.drop_duplicates()
 
-				# Keep only the last 100 entries of data
-				num_rows = data.shape[0]
-				if num_rows > 100:
-					data = data.drop(data.tail(1).index)
-				data.to_csv(f'{target}.csv')
-		print('Reports completed.', flush=True)
+					# Keep only the last 100 entries of data
+					num_rows = data.shape[0]
+					if num_rows > 100:
+						data = data.drop(data.tail(1).index)
+					data.to_csv(f'{target}.csv')
+		except Exception as err:
+			print('Could not generate report data.', flush=True)
+			traceback.print_exc()

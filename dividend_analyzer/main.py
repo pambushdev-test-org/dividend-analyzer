@@ -1,7 +1,6 @@
 import sys
 import argparse
-from . import config
-from . import data
+from . import config, data, analysis, alerts
 from . import TICKER_LIST, DATA_SOURCE
 from .version import version
 
@@ -30,6 +29,10 @@ def main(args=None):
 		help='Print version number', action='version', 
 		version=f'dividend-analyzer v{version}'
 	)
+	parser.add_argument('-e', '--email-report',
+		action='store_true',
+		help='Send an email of the report'
+	)
 	parser.add_argument('command', nargs='?',
 		help='Display or update configs in the config.ini file',
 		choices=FUNCTION_MAP.keys()
@@ -51,8 +54,15 @@ def main(args=None):
 			config_func()
 
 	# Run the dividend checker
-	d = data.DividendData(TICKER_LIST)
-	d.check_dividends(DATA_SOURCE)
+	dd = data.DividendData(TICKER_LIST)
+	dd.check_dividends(DATA_SOURCE)
+
+	# Go process all the data received
+	da = analysis.DataAnalysis()
+	report = da.process_data()
+	if not report.empty and args.email_report:
+		print('Sending email report...', flush=True)
+		alerts.send_email_report(report)
 
 if __name__ == "__main__":
     sys.exit(main())

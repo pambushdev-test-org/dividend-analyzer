@@ -3,6 +3,7 @@ import pandas as pd
 import time
 import logging
 import traceback
+import math
 from os import listdir
 from os.path import isfile, join
 from . import alerts
@@ -23,15 +24,23 @@ class DataAnalysis:
 				for f in file_list:
 					self.analyze_data(file=f)
 
-				#self.report_data.to_csv('report.csv')
 				if self.has_changed:
-					print('Sending report of changes to dividend data...', flush=True)
-					self.gen_alerts()
+					# Generate the report in a csv file and return it
+					print('Changes found. Sending report of changes to dividend data...', flush=True)
+					if not os.path.exists(os.path.join(PARENT_DIR, 'reports')):
+						os.mkdir(os.path.join(PARENT_DIR, 'reports'))
+					report_path = os.path.join(PARENT_DIR, 'reports/report.csv')
+					self.report_data.to_csv(report_path)
+					print(f'Report generated and is located at {report_path}.')					
+					return self.report_data
+				else:
+					print('No changes to report.', flush=True)
+					return pd.DataFrame()
 		except Exception as err:
 			print('Could not process the data.', flush=True)
 			traceback.print_exc()
 
-	# Analyze dividend data for tickers based off of data from alphavantage
+	# Analyze dividend data for tickers based on data from alphavantage
 	def analyze_data(self, file):
 		data = pd.read_csv(file, index_col=0)
 		if data.shape[0] > 1:
@@ -58,8 +67,11 @@ class DataAnalysis:
 	def gen_report(self, r1, r2, y1, y2, r_label, y_label, symbol, report_time):		
 		r_delta = self.calc_delta(r1, r2)
 		y_delta = self.calc_delta(y1, y2)
+		# Checking if these float delta values are close to zero
+		r_is_zero = math.isclose(r_delta, 0, rel_tol=1e-6, abs_tol=0)
+		y_is_zero = math.isclose(y_delta, 0, rel_tol=1e-6, abs_tol=0)
 
-		if r_delta != 0 and y_delta != 0:
+		if not r_is_zero or not y_is_zero:
 			if not self.has_changed: 
 				self.has_changed = True
 			df = pd.DataFrame(
@@ -75,9 +87,4 @@ class DataAnalysis:
 			)
 			self.report_data = pd.concat([df, self.report_data])			
 		else:
-			print(f'No diffs for {symbol}, nothing to report.', flush=True)
-
-	# Send email alerts if there are changes to any of the dividend data
-	def gen_alerts(self):
-		print('Sending email report of changes...', flush=True)
-		alerts.send_email_report(self.report_data)
+			print(f'No diffs for {symbol}, nothing to report.', flush=True)	

@@ -24,10 +24,7 @@ class DividendData():
 		try:
 			self.get_ticker_data(source=source)
 			self.scrape_dividend_data(source=source)			
-			self.gen_report()
-			# Go process all the data received
-			d = analysis.DataAnalysis()
-			d.process_data()
+			self.gen_report()			
 		except Exception as err:
 			print(f'Could not get ticker data from {source}.', flush=True)
 			traceback.print_exc()

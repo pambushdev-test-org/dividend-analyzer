@@ -7,7 +7,7 @@ import math
 from os import listdir
 from os.path import isfile, join
 from . import alerts
-from . import PARENT_DIR, DATA_DIR
+from . import PARENT_DIR, DATA_DIR, REPORT_DIR
 
 class DataAnalysis:
 	def __init__(self):
@@ -28,8 +28,8 @@ class DataAnalysis:
 					# Generate the report in a csv file and return it
 					print('Changes found. Sending report of changes to dividend data...', flush=True)
 					if not os.path.exists(os.path.join(PARENT_DIR, 'reports')):
-						os.mkdir(os.path.join(PARENT_DIR, 'reports'))
-					report_path = os.path.join(PARENT_DIR, 'reports/report.csv')
+						os.mkdir(os.path.join(PARENT_DIR, REPORT_DIR))
+					report_path = os.path.join(PARENT_DIR, f'{REPORT_DIR}/report.csv')
 					self.report_data.to_csv(report_path)
 					print(f'Report generated and is located at {report_path}.')					
 					return self.report_data

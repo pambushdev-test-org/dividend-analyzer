@@ -8,6 +8,7 @@ configs 	= config.get_configs()
 PARENT_DIR 	= os.path.abspath(os.path.dirname(__file__))
 DATA_DIR 	= configs['DATA']['DATA_DIR']
 DATA_SOURCE = configs['DATA']['DATA_SOURCE']
+REPORT_DIR 	= config.['DATA']['REPORT_DIR']
 API_KEYS 	= configs['API_KEYS']
 TICKER_LIST = configs['TICKERS']['TICKER_LIST']
 EMAIL_VARS 	= configs['EMAIL_VARS']

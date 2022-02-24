@@ -8,13 +8,32 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from . import PARENT_DIR, EMAIL_VARS
 
+# Color cells green for positive values and red for negative
+def color_cell(cell):
+	match cell:
+		# Some cells are strings (ticker, timestamp), ignore these
+		case cell if type(cell) == str:
+			return cell
+		case cell if cell > 0:
+			return f'<div style="color: green">{cell}</div>'
+		case cell if cell < 0:
+			return f'<div style="color: red">{cell}</div>'
+		case _:
+			return f'<div>{cell}</div>'
+
 def send_email_report(data):
 	EMAIL_DIR = os.path.join(PARENT_DIR, 'email') # email templates
 	email_txt = open(os.path.join(EMAIL_DIR, 'email_txt.txt')).read()
 	email_html = open(os.path.join(EMAIL_DIR, 'email_html.html')).read()
+	
+	# Setup and apply formatting to color cells of report table
+	fmt = {}
+	for i in data.columns[:]:
+		fmt[i] = lambda cell: color_cell(cell)
 
 	# Place data as an html table inside the html of email_html. Replacing via placeholder {data}.
-	email_html = email_html.replace(r'{data}', data.to_html())
+	rendered_data = data.to_html(formatters=fmt, escape=False)
+	email_html = email_html.replace(r'{data}', rendered_data)
 
 	port 		= 465
 	password 	= EMAIL_VARS['PASS']

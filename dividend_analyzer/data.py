@@ -24,7 +24,8 @@ class DividendData():
 		try:
 			self.get_ticker_data(source=source)
 			self.scrape_dividend_data(source=source)			
-			self.gen_report()			
+			self.gen_report()
+			print('Data for all tickers has been received.', flush=True)			
 		except Exception as err:
 			print(f'Could not get ticker data from {source}.', flush=True)
 			traceback.print_exc()
@@ -153,8 +154,8 @@ class DividendData():
 							break					
 					
 					data = {
-						'DividendPerShare': dividend_payments_total,
-						'DividendYield': dividend_payments_total / ticker_close_price,
+						'DividendPerShare': round(dividend_payments_total, 6),
+						'DividendYield': round((dividend_payments_total / ticker_close_price), 6),
 						'Symbol': ticker # Fill in missing symbol data here						
 					}
 					return data

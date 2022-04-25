@@ -85,6 +85,6 @@ class DataAnalysis:
 					f'{y_label}Delta'	: y_delta					
 				}, index=[report_time]
 			)
-			self.report_data = pd.concat([df, self.report_data])			
+			self.report_data = pd.concat([self.report_data, df])			
 		else:
 			print(f'No diffs for {symbol}, nothing to report.', flush=True)	
